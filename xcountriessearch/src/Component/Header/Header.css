@@ -1,0 +1,13 @@
+.header {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.header input {
+    width: 40rem;
+    padding: 0.4rem;
+}
