@@ -10,8 +10,13 @@ const XCountries = ({searchText}) => {
     const fetchCountries = async () => {
         try {
             const response = await fetch("https://restcountries.com/v3.1/all");
-            const data = await response.json();
-            return data;
+            if (response.ok) {
+                const data = await response.json();
+                return data;
+            } else {
+                console.error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+                return null;
+            }
         } catch (error) {
             console.error("Failed to fetch data: ", error);
             setError(error.message);
