@@ -11,29 +11,36 @@ const XCountries = ({searchText}) => {
         try {
             const response = await fetch("https://restcountries.com/v3.1/all");
             const data = await response.json();
-            setData(data);
-            setFilteredData(data);
+            return data;
         } catch (error) {
             console.error("Failed to fetch data: ", error);
             setError(error.message);
+            return null;
         }
     }
 
     const searchCountry = () => {
         if(searchText) {
             const filteredCounty = data.filter(data => data.name.common.toLowerCase().includes(searchText.toLowerCase()));
-            setFilteredData(filteredCounty);
+            return filteredCounty;
         } else {
-            setFilteredData(data);
+            return data;
         }
     }
 
     useEffect(() => {
-        searchCountry();
+        const filteredCounty = searchCountry();
+        setFilteredData(filteredCounty);
     }, [searchText]);
 
     useEffect(() => {
-        fetchCountries();
+       async function loadCountries() {
+        const countries = await fetchCountries();
+        setData(countries);
+        setFilteredData(countries);
+        }
+
+        loadCountries();
     }, []);
 
     if(error) {
