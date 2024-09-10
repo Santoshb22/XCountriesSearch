@@ -5,16 +5,15 @@ const XCountries = ({searchText}) => {
     
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
-    const [error, setError] = useState(null);
 
     const fetchCountries = async () => {
         try {
-            const response = await fetch("https://restcountries.com/v3.1/all");
-            const data = await response.json();
+            const res = await fetch("https://restcountries.com/v3.1/all");
+            const data = await res.json();
+
             return data;
-        } catch (error) {
-            console.error(error);
-            setError(error.message);
+        } catch (e) {
+            console.error(e);
         }
     }
 
@@ -41,9 +40,6 @@ const XCountries = ({searchText}) => {
         loadCountries();
     }, []);
 
-    if(error) {
-        <p>Error: {error}</p>
-    }
   
   return (
     <div className='contries'>
