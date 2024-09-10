@@ -10,39 +10,32 @@ const XCountries = ({searchText}) => {
     const fetchCountries = async () => {
         try {
             const response = await fetch("https://restcountries.com/v3.1/all");
-            if (response.ok) {
-                const data = await response.json();
-                return data;
-            } else {
-                console.error(`Failed to fetch data: ${response.status} ${response.statusText}`);
-                return null;
-            }
+            const data = await response.json();
+            return data;
         } catch (error) {
-            console.error("Failed to fetch data: ", error);
+            console.error(error);
             setError(error.message);
-            return null;
         }
     }
 
     const searchCountry = () => {
         if(searchText) {
             const filteredCounty = data.filter(data => data.name.common.toLowerCase().includes(searchText.toLowerCase()));
-            return filteredCounty;
+            setFilteredData(filteredCounty);
         } else {
-            return data;
+            setFilteredData(data);
         }
     }
 
     useEffect(() => {
-        const filteredCounty = searchCountry();
-        setFilteredData(filteredCounty);
+        searchCountry();
     }, [searchText]);
 
     useEffect(() => {
        async function loadCountries() {
-        const countries = await fetchCountries();
-        setData(countries);
-        setFilteredData(countries);
+            const countries = await fetchCountries();
+            setData(countries);
+            setFilteredData(countries);
         }
 
         loadCountries();

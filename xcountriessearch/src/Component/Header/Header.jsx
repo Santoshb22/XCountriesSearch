@@ -1,13 +1,13 @@
 import React from 'react'
 import "./Header.css"
-const Header = ({setSearchText}) => {
+const Header = ({setSearchText, searchText}) => {
 
     const handleChange = (e) => {
         setSearchText(e.target.value);
     }
   return (
     <div className='header'>
-        <input type="text" placeholder='Search Country' onChange={handleChange}/>
+        <input type="text" placeholder='Search Country' value={searchText} onChange={handleChange}/>
     </div>
   )
 }

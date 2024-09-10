@@ -7,7 +7,7 @@ const App = () => {
 
   return (
     <div>
-      <Header setSearchText={setSearchText}/>
+      <Header setSearchText={setSearchText} searchText = {searchText}/>
       <XCountries searchText = {searchText}/>
     </div>
   )
